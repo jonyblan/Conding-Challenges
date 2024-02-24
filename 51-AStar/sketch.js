@@ -1,5 +1,5 @@
-let rows = 100;
-let cols = 100;
+let rows = 5;
+let cols = 5;
 let obstaclePercentage = 0.25;
 let grid = [rows];
 let start;
@@ -17,10 +17,21 @@ function distance(elem1, elem2){
 	return Math.sqrt(distX * distX + distY * distY);
 }
 
+// this works by calculating the minimum ammount of steps that have to be horizontal/vertical (distance of 1)
+// and assuming the rest of the steps are diagonal (the shortest)
 function heuristic(elem1, elem2){
-	//let distX = Math.abs(elem1.x - elem2.x);
-	//let distY = Math.abs(elem1.y - elem2.y);
-	//return distX + distY;
+	let totalMinDistance = 0;
+	let distX = Math.abs(elem1.x - elem2.x);
+	let distY = Math.abs(elem1.y - elem2.y);
+	if(distX > distY){
+		totalMinDistance = distX - distY + Math.sqrt(distY*distY + distY*distY);
+	}
+	else if(distX < distY){
+		totalMinDistance = distY - distX + Math.sqrt(distX*distX + distX*distX);
+	}
+	else{
+		totalMinDistance = Math.sqrt(distX*distX + distX*distX);
+	}
 	return distance(elem1, elem2);
 }
 
@@ -53,7 +64,7 @@ function setup(){
 	start.g = 0, start.wall = false, end.wall = false;
 	openSet.push(start);
 
-	//frameRate(10);
+	//frameRate(1);
 } 
 
 function draw(){
@@ -72,7 +83,7 @@ function draw(){
 
 		if(current == end){
 			console.log("finished in " + optimalPath.length + " steps, with a distance of " + optimalDistance);
-			let x = end.x, y = end.y;
+			/*let x = end.x, y = end.y;
 			start = grid[x][y];
 			openSet.splice(0, openSet.length);
 			openSet.push(start);
@@ -88,7 +99,7 @@ function draw(){
 					grid[i][j].h = undefined;
 				}
 			}
-			grid[x][y].g = 0;
+			grid[x][y].g = 0;*/
 		} 
 		else{
 			openSet.splice(lowestIndex, 1);

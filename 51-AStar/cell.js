@@ -14,6 +14,21 @@ class Cell{
 		}
 	}
 
+	showValue(w, h){
+		if((this.f != undefined)){
+			fill(255);
+			textAlign(CENTER);
+			textSize((w-1)/4);
+			let aux1 = this.f;
+			aux1 = Math.trunc(aux1);
+			let aux2 = this.g;
+			aux2 = Math.trunc(aux2);
+			let aux3 = this.h;
+			aux3 = Math.trunc(aux3);
+			text(aux1 + "-" + aux2 + "-" + aux3, this.x * w + w / 2, this.y * h + h / 2);
+		}
+	}
+
 	// rgb/grey colour
 	show(w, h, r, g = null, b = null){
 		if(this.wall){
@@ -27,14 +42,7 @@ class Cell{
 		}
 		noStroke();
 		rect(this.x*w, this.y*h, w - 1, h - 1);
-		/*if((this.f != undefined)){
-			fill(255);
-			textAlign(CENTER);
-			textSize((w-1)/2);
-			let aux = this.f;
-			aux = Math.trunc(aux);
-			text(aux, this.x * w + w / 2, this.y * h + h / 2);
-		}*/
+		this.showValue(w, h);
 	}
 
 	addNeighbours(grid){
