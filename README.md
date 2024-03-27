@@ -7,6 +7,5 @@ If there's one proyect I really like or if I have a big idea I'll make a bigger 
 
 Rules:
   1) The code can't do the same as Daniel's, it has to have a different description, his should be an inspiration
-  2) I have to do at least 3 of them per week
-  3) At least once per month I have to make a "big" proyect and use 1-2 weeks in it (doesnt have to be from the conding challenges)
-  4) It doesn't have to be in order. I can (and probably will) use coding challenges to prepare for a big proyect
+  2) At least once per month I have to make a "big" proyect and use 1-2 weeks in it (doesnt have to be from the conding challenges)
+  3) It doesn't have to be in order. I can (and probably will) use coding challenges to prepare for a big proyect
