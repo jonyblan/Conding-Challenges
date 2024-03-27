@@ -1,6 +1,6 @@
 let rows = 10, cols = 10;
 
-let cantMines = 20;
+let cantMines = 10;
 
 let cellWidth, cellHeight;
 

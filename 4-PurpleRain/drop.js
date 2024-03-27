@@ -1,9 +1,9 @@
 class Dropped{
-	constructor(dropsIn, x, z){
+	constructor(dropsIn, x, z, xSpeedDropped, ySpeedDropped){
 		this.x = x;
-		this.xSpeed = random(-0.5, 0.5);
+		this.xSpeed = random(-xSpeedDropped, xSpeedDropped);
 		this.y = height - 1;
-		this.ySpeed = random(-0.5, -2);
+		this.ySpeed = random(0, -ySpeedDropped);
 		this.z = z;
 		this.dropsIn = dropsIn;
 	}
@@ -32,15 +32,14 @@ class Dropped{
 }
 
 class Drop{
-	constructor(){
+	constructor(maxZ){
 		this.x = random(width);
 		this.y = -10;
-		this.z = random(0, 20);
+		this.z = random(0, maxZ);
 		this.len = map(this.z, 0, 20, 10, 20);
 		this.ySpeed = map(this.z, 0, 20, 1, 20);
 		this.grav = map(this.z, 0, 20, 0.05, 0.2);
 		this.dropped = [];
-		
 	}
 
 	dropFall(){
@@ -48,15 +47,15 @@ class Drop{
 		this.ySpeed = this.ySpeed + this.grav;
 	}
 
-	createDropped(){
+	createDropped(maxDroppedPerDrop, xSpeedDropped, ySpeedDropped){
 		this.y = -100;
-		let cantDrops = random(1, 4);
+		let cantDrops = random(1, maxDroppedPerDrop);
 		for(let i = 0; i < cantDrops; i++){
-			this.dropped[i] = new Dropped(0, this.x, this.z);
+			this.dropped[i] = new Dropped(0, this.x, this.z, xSpeedDropped, ySpeedDropped);
 		}
 	}
 
-	fallDropped(){
+	fallDropped(maxZ){
 		for(let i = this.dropped.length - 1; i >= 0; i--){
 			if(this.dropped[i].droppedFall(this.grav) == 1){
 				this.dropped.splice(i, 1);
@@ -64,34 +63,30 @@ class Drop{
 		}
 		if(this.dropped.length == 0){
 			this.y = random(-200, -100);
-			this.ySpeed = map(this.z, 0, 20, 4, 10);
+			this.ySpeed = map(this.z, 0, maxZ, 2, 5);
 		}
 	}	
 
-	fall(){
+	fall(maxZ, maxDroppedPerDrop, xSpeedDropped, ySpeedDropped){
 		if (this.y > height) {
-			this.createDropped();
-			console.log("a");
+			this.createDropped(maxDroppedPerDrop, xSpeedDropped, ySpeedDropped);
 		}
 		else if(this.dropped.length == 0){
 			this.dropFall();
-			console.log("b");
 		}
 		else{
-			this.fallDropped();
-			console.log(this.dropped.length);
+			this.fallDropped(maxZ);
 		}
 	}
   
-	show() {
+	show(maxZ) {
 		if(this.dropped.length == 0){
-			let thick = map(this.z, 0, 20, 1, 3);
+			let thick = map(this.z, 0, maxZ, 1, 3);
 			strokeWeight(thick);
 			stroke(138, 43, 226);
 			line(this.x, this.y, this.x, this.y + this.len);
 		}
 		else{
-			console.log("AAAAAA");
 			for(let i = 0; i < this.dropped.length; i++){
 				this.dropped[i].show();
 			}

@@ -2,7 +2,7 @@ class Cell{
 	constructor(x, y, obstaclePercentage){
 		this.x = x;
 		this.y = y;
-		this.f = undefined; // f is just the sum of the 2, we want to pick the cell with the lowest h possibl
+		this.f = undefined; // f is just the sum of the 2, we want to pick the cell with the lowest f possible
 		this.g = undefined; // g is the distance between the cell and the start cell
 		this.h = undefined; // h is the minimum distance between the cell and the end cell
 		this.neighbours = [];
@@ -42,7 +42,7 @@ class Cell{
 		}
 		noStroke();
 		rect(this.x*w, this.y*h, w - 1, h - 1);
-		this.showValue(w, h);
+		//this.showValue(w, h);
 	}
 
 	addNeighbours(grid){

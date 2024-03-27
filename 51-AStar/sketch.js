@@ -1,5 +1,5 @@
-let rows = 5;
-let cols = 5;
+let rows = 50;
+let cols = 50;
 let obstaclePercentage = 0.25;
 let grid = [rows];
 let start;
